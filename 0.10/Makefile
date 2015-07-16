@@ -1,8 +1,12 @@
+REGISTRY=mutterio
+NAME=mini-nodejs
+TAG=latest
+
 build: Dockerfile
-	docker build -t mini-nodejs .
+	docker build -t ${NAME} .
 
 tag: build
-	docker tag -f mini-nodejs mutterio/mini-nodejs
+	docker tag -f ${NAME} ${REGISTRY}/${NAME}:${TAG}
 
 publish: tag
-	docker push mutterio/mini-nodejs
+	docker push ${REGISTRY}/${NAME}:${TAG}

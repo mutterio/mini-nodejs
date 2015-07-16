@@ -1,8 +1,12 @@
+REGISTRY=mutterio
+NAME=mini-iojs
+TAG=latest
+
 build: Dockerfile
-	docker build -t mini-iojs .
+	docker build -t ${NAME} .
 
 tag: build
-	docker tag -f mini-iojs mutterio/mini-iojs:2.3
+	docker tag -f ${NAME} ${REGISTRY}/${NAME}:${TAG}
 
 publish: tag
-	docker push mutterio/mini-iojs
+	docker push ${REGISTRY}/${NAME}:${TAG}

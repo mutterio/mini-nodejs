@@ -1,7 +1,7 @@
 FROM mutterio/mini-base
 
 ENV VERSION=v2.3.2 CMD=iojs DOMAIN=iojs.org
-ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libgcc libstdc++" RM_DIRS=/usr/include
+
 
 RUN apk update && \
   apk add openssl linux-headers make gcc g++ python paxctl libgcc libstdc++ && \
