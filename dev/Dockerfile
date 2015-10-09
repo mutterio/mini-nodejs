@@ -1,6 +1,6 @@
 FROM mutterio/mini-base
 
-ENV VERSION=v0.10.39
+ENV VERSION=v4.1.2
 
 RUN apk update && \
   apk add make gcc g++ python paxctl curl openssl ca-certificates \
