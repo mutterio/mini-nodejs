@@ -1,12 +1,11 @@
 FROM mutterio/mini-base
 
-ENV VERSION=v0.10.39 CMD=node DOMAIN=nodejs.org
+ENV VERSION=v0.10.39
 
 RUN apk update && \
-  apk add make gcc g++ python paxctl curl openssl ca-certificates \
-    libgcc libstdc++ && \
-  curl -sSL https://${DOMAIN}/dist/${VERSION}/${CMD}-${VERSION}.tar.gz | tar -xz && \
-  cd /${CMD}-${VERSION} && \
+  apk add --virtual build-dependencies make gcc g++ python paxctl curl && \
+  curl -sSL https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.gz | tar -xz && \
+  cd /node-${VERSION} && \
   NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
   export CFLAGS="$CFLAGS -D__USE_MISC" && \
   ./configure --prefix=/usr && \
@@ -14,11 +13,13 @@ RUN apk update && \
   paxctl -c -m out/Release/mksnapshot && \
   make -j${NPROC} && \
   make install && \
-  paxctl -cm /usr/bin/${CMD} && \
+  paxctl -cm /usr/bin/node && \
+  apk del build-dependencies && \
+  apk add openssl ca-certificates libgcc libstdc++ && \
   npm install -g npm && \
   cd / && \
   rm -rf \
-    /${CMD}-${VERSION} \
+    /node-${VERSION} \
     /var/cache/apk/* \
     /tmp/* \
     /root/.npm \

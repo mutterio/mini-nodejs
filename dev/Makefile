@@ -1,6 +1,6 @@
 REGISTRY=mutterio
 NAME=mini-nodejs
-TAG=builder
+TAG=builder_4.1.2
 
 build: Dockerfile
 	docker build -t ${NAME} .
