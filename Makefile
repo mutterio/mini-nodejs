@@ -4,7 +4,7 @@ TAG=latest
 
 build: Dockerfile
 	docker build -t ${NAME} .
-	docker build -t ${NAME}-slim -f Dockerfile.slim .
+	docker build -t ${NAME}-slim -f slim/Dockerfile .
 
 tag: build
 	docker tag -f ${NAME} ${REGISTRY}/${NAME}:${TAG}
