@@ -16,7 +16,6 @@ RUN apk add --update curl make gcc g++ python linux-headers paxctl \
     npm install -g npm && \
     find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
   fi && \
-  apk del curl make gcc g++ python linux-headers paxctl ${DEL_PKGS} && \
   rm -rf \
     /etc/ssl \
     /node-${VERSION} \
