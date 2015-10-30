@@ -1,6 +1,6 @@
 FROM mutterio/mini-base
 
-ENV VERSION=v4.2.1
+ENV VERSION=v5.0.0
 
 RUN apk add --update curl make gcc g++ python linux-headers paxctl \
     libgcc libstdc++ && \
