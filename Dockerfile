@@ -3,7 +3,7 @@ FROM mutterio/mini-base
 ENV VERSION=v5.0.0
 
 RUN apk add --update curl make gcc g++ python linux-headers paxctl \
-    libgcc libstdc++ && \
+    libgcc libstdc++ krb5-dev && \
   curl -sSL https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.gz | tar -xz && \
   cd /node-${VERSION} && \
 
