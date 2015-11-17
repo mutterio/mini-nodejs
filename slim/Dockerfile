@@ -4,7 +4,7 @@ ENV VERSION=v5.0.0
 ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libgcc libstdc++" RM_DIRS=/usr/include
 
 RUN apk add --update curl make gcc g++ python linux-headers paxctl \
-    libgcc libstdc++ && \
+    libgcc libstdc++ krb5-dev && \
   curl -sSL https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.gz | tar -xz && \
   cd /node-${VERSION} && \
 
