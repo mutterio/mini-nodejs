@@ -1,15 +1,14 @@
 FROM mutterio/mini-base
-
-ENV VERSION=v5.0.0
+ARG VERSION=5.1.0
+# ENV VERSION=$DOCKER_VERSION
 ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libgcc libstdc++" RM_DIRS=/usr/include
 
 RUN apk add --update curl make gcc g++ python linux-headers paxctl \
-    libgcc libstdc++ && \
-  curl -sSL https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.gz | tar -xz && \
-  cd /node-${VERSION} && \
-
+    libgcc libstdc++ krb5-dev && \
+  curl -sSL https://nodejs.org/dist/v${VERSION}/node-v${VERSION}.tar.gz | tar -xz && \
+  cd /node-v${VERSION} && \
   ./configure --prefix=/usr ${CONFIG_FLAGS} && \
-  make -j$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
+  make -j$(($(grep -c ^processor /proc/cpuinfo)+1)) && \
   make install && \
   paxctl -cm /usr/bin/node && \
   cd / && \
@@ -20,7 +19,7 @@ RUN apk add --update curl make gcc g++ python linux-headers paxctl \
   apk del curl make gcc g++ python linux-headers paxctl ${DEL_PKGS} && \
   rm -rf \
     /etc/ssl \
-    /node-${VERSION} \
+    /node-v${VERSION} \
     ${RM_DIRS} \
     /usr/share/man \
     /tmp/* \

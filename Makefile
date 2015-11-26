@@ -1,14 +1,15 @@
 REGISTRY=mutterio
-NAME=mini-nodejs
-TAG=latest
+NAME=mini-node
+VERSION?=4.2.2
 
 build: Dockerfile
-	docker build -t ${NAME} .
-	docker build -t ${NAME}-slim -f slim/Dockerfile .
+	# docker build -t ${NAME}-${VERSION} --build-arg VERSION=${VERSION} .
+	docker build -t ${NAME}-${VERSION}-slim --build-arg VERSION=${VERSION} -f slim/Dockerfile .
 
 tag: build
-	docker tag -f ${NAME} ${REGISTRY}/${NAME}:${TAG}
-	docker tag -f ${NAME}-slim ${REGISTRY}/${NAME}:slim
+	docker tag -f ${NAME}-${VERSION} ${REGISTRY}/${NAME}:${VERSION}
+	docker tag -f ${NAME}-${VERSION}-slim ${REGISTRY}/${NAME}:${VERSION}-slim
 
-publish: tag
-	docker push ${REGISTRY}/${NAME}:${TAG}
+# publish: tag
+# 	docker push ${REGISTRY}/${NAME}:${TAG}
+# 	docker push ${REGISTRY}/${NAME}:${TAG}

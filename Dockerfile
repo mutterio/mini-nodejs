@@ -1,14 +1,16 @@
 FROM mutterio/mini-base
+ARG VERSION=5.1.0
+# ENV VERSION=v5.0.0
 
-ENV VERSION=v5.0.0
-
-RUN apk add --update curl make gcc g++ python linux-headers paxctl \
-    libgcc libstdc++ && \
-  curl -sSL https://nodejs.org/dist/${VERSION}/node-${VERSION}.tar.gz | tar -xz && \
-  cd /node-${VERSION} && \
-
+RUN \
+  echo "building for $VERSION" && \
+  num_cores = $(($(grep -c ^processor /proc/cpuinfo)+1))
+  apk add --update curl make gcc g++ python linux-headers paxctl \
+    libgcc libstdc++ krb5-dev && \
+  curl -sSL https://nodejs.org/dist/v${VERSION}/node-v${VERSION}.tar.gz | tar -xz && \
+  cd /node-v${VERSION} && \
   ./configure --prefix=/usr ${CONFIG_FLAGS} && \
-  make -j$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
+  make -j$(($(grep -c ^processor /proc/cpuinfo)+1)) && \
   make install && \
   paxctl -cm /usr/bin/node && \
   cd / && \
@@ -18,7 +20,7 @@ RUN apk add --update curl make gcc g++ python linux-headers paxctl \
   fi && \
   rm -rf \
     /etc/ssl \
-    /node-${VERSION} \
+    /node-v${VERSION} \
     ${RM_DIRS} \
     /usr/share/man \
     /tmp/* \
