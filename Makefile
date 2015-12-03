@@ -1,9 +1,10 @@
 REGISTRY=mutterio
 NAME=mini-node
-VERSION?=4.2.2
+# VERSION?=4.2.2
+VERSION?=5.1.0
 
 build: Dockerfile
-	# docker build -t ${NAME}-${VERSION} --build-arg VERSION=${VERSION} .
+	docker build -t ${NAME}-${VERSION} --build-arg VERSION=${VERSION} .
 	docker build -t ${NAME}-${VERSION}-slim --build-arg VERSION=${VERSION} -f slim/Dockerfile .
 
 tag: build

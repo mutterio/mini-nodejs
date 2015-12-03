@@ -4,7 +4,6 @@ ARG VERSION=5.1.0
 
 RUN \
   echo "building for $VERSION" && \
-  num_cores = $(($(grep -c ^processor /proc/cpuinfo)+1))
   apk add --update curl make gcc g++ python linux-headers paxctl \
     libgcc libstdc++ krb5-dev && \
   curl -sSL https://nodejs.org/dist/v${VERSION}/node-v${VERSION}.tar.gz | tar -xz && \
