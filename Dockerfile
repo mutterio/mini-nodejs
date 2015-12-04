@@ -1,7 +1,5 @@
 FROM mutterio/mini-base
-ARG VERSION=5.1.0
-# ENV VERSION=v5.0.0
-
+ARG VERSION=5.1.1
 RUN \
   echo "building for $VERSION" && \
   apk add --update curl make gcc g++ python linux-headers paxctl \

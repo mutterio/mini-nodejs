@@ -1,9 +1,9 @@
 FROM mutterio/mini-base
-ARG VERSION=5.1.0
-# ENV VERSION=$DOCKER_VERSION
+ARG VERSION=5.1.1
 ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libgcc libstdc++" RM_DIRS=/usr/include
-
-RUN apk add --update curl make gcc g++ python linux-headers paxctl \
+RUN \
+  echo "building for $VERSION" && \
+  apk add --update curl make gcc g++ python linux-headers paxctl \
     libgcc libstdc++ krb5-dev && \
   curl -sSL https://nodejs.org/dist/v${VERSION}/node-v${VERSION}.tar.gz | tar -xz && \
   cd /node-v${VERSION} && \
