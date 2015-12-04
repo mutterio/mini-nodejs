@@ -11,5 +11,5 @@ tag: build
 	docker tag -f ${NAME}-${VERSION}-slim ${REGISTRY}/${NAME}:${VERSION}-slim
 
 publish: tag
-	docker push ${REGISTRY}/${NAME}:${TAG}
-	docker push ${REGISTRY}/${NAME}:${TAG}
+	docker push ${REGISTRY}/${NAME}:${VERSION}
+	docker push ${REGISTRY}/${NAME}:${VERSION}-slim
