@@ -1,6 +1,6 @@
 FROM mutterio/mini-base
 ARG VERSION=5.1.1
-ENV CONFIG_FLAGS="--fully-static --without-npm" DEL_PKGS="libgcc libstdc++" RM_DIRS=/usr/include
+ENV CONFIG_FLAGS="--fully-static" DEL_PKGS="libgcc libstdc++" RM_DIRS=/usr/include
 RUN \
   echo "building for $VERSION" && \
   apk add --update curl make gcc g++ python linux-headers paxctl \
