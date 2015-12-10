@@ -3,7 +3,7 @@ ARG VERSION=5.1.1
 ENV CONFIG_FLAGS="--fully-static" DEL_PKGS="libgcc libstdc++" RM_DIRS=/usr/include
 RUN \
   echo "building for $VERSION" && \
-  apk add --update curl make gcc g++ python linux-headers paxctl \
+  apk add --update curl make gcc g++ binutils-gold python linux-headers paxctl \
     libgcc libstdc++ krb5-dev && \
   curl -sSL https://nodejs.org/dist/v${VERSION}/node-v${VERSION}.tar.gz | tar -xz && \
   cd /node-v${VERSION} && \
@@ -16,7 +16,7 @@ RUN \
     npm install -g npm && \
     find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
   fi && \
-  apk del curl make gcc g++ python linux-headers paxctl ${DEL_PKGS} && \
+  apk del curl make gcc g++ python binutils-gold linux-headers paxctl ${DEL_PKGS} && \
   rm -rf \
     /etc/ssl \
     /node-v${VERSION} \

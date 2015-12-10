@@ -2,7 +2,7 @@ FROM mutterio/mini-base
 ARG VERSION=5.1.1
 RUN \
   echo "building for $VERSION" && \
-  apk add --update curl make gcc g++ python linux-headers paxctl \
+  apk add --update curl make gcc g++ binutils-gold python linux-headers paxctl \
     libgcc libstdc++ krb5-dev && \
   curl -sSL https://nodejs.org/dist/v${VERSION}/node-v${VERSION}.tar.gz | tar -xz && \
   cd /node-v${VERSION} && \
