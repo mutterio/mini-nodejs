@@ -13,6 +13,7 @@ RUN \
   cd / && \
   if [ -x /usr/bin/npm ]; then \
     npm install -g npm && \
+    npm install -g --build-from-source --unsafe-perm node-inspector && \
     find /usr/lib/node_modules/npm -name test -o -name .bin -type d | xargs rm -rf; \
   fi && \
   rm -rf \
